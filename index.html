@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐰Welcome to YENQI's Site！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f6eaf3 0%, #a4d7fc 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            color: rgb(14, 11, 11);
+        }
+
+        /* ------- UPDATED: make .profile-img an <img> ------- */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 30px;
+            object-fit: cover; /* keep aspect ratio */
+            display: block;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .quick-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .quick-info span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 20px 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #200955;
+        }
+
+        .tab-btn.active {
+            background: #ed84bc;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #ea66a4;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #ff6b9d, #d9a9f0);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ea1164;
+        }
+
+        .info-card h3 {
+            color: #d6125e;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .education-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b9d;
+            transition: transform 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .education-item h3 {
+            color: #ff6b9d;
+            margin-bottom: 10px;
+        }
+
+        .period {
+            background: #702e40;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #ebc3f4 0%, #a870e1 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 5px 0;
+            opacity: 0.9;
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .hobby-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b9d;
+        }
+
+        .hobby-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .travel-map {
+            background: linear-gradient(135deg, #b5e7f8 0%, #bef1c6 100%);
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .travel-map h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .countries-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .country-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9em;
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, #ff6b9d 0%, #efc2d5 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .achievement-card .year {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .achievement-card h4 {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            text-align: center;
+            background: linear-gradient(135deg, #9fb0fc 0%, #e2d3f0 100%);
+            color: rgb(7, 7, 7);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .contact-info a {
+            color: rgb(30, 11, 70);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .personality-traits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .trait-card {
+            background: linear-gradient(135deg, #ee81a5 0%, #e1c4ef 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .quick-info {
+                gap: 15px;
+            }
+            
+            .tab-btn {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- UPDATED: replace text avatar with real photo -->
+            <img src="livePhoto_1747495701.JPG" alt="YenQi profile photo" class="profile-img" />
+            <h1>LOW YEN QI(刘彦琪)</h1>
+            <p class="subtitle">Business Student • Global Explorer • INFJ-OH</p>
+            <div class="quick-info">
+                <span>📍 Shanghai, China</span>
+                <span>🎂 Sep 30, 2004</span>
+                <span>🏠 Born in KL, Malaysia</span>
+                <span>🏫 SJTU Business Administration</span>
+            </div>
+        </header>
+  
+
+        <main class="main-content">
+            <nav class="nav-tabs">
+                <button class="tab-btn active" onclick="showTab('about')">About Me</button>
+                <button class="tab-btn" onclick="showTab('education')">Education</button>
+                <button class="tab-btn" onclick="showTab('experience')">Experience</button>
+                <button class="tab-btn" onclick="showTab('skills')">Skills</button>
+                <button class="tab-btn" onclick="showTab('hobbies')">Hobbies & Travel</button>
+                <button class="tab-btn" onclick="showTab('contact')">Contact</button>
+            </nav>
+
+            <div id="about" class="tab-content active">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-grid">
+                    <div class="info-card">
+                        <h3>Personal Info</h3>
+                        <p><strong>Name:</strong> LOW YEN QI (YenQi)</p>
+                        <p><strong>MBTI:</strong> INFJ-OH</p>
+                        <p><strong>Current Location:</strong> Shanghai, China🇨🇳</p>
+                        <p><strong>Hometown:</strong> Kuala Lumpur, Malaysia🇲🇾</p>
+                        <p><strong>Languages:</strong> Mandarin (Native), English (Professional), Malay (Professional), Cantonese (Native)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>My Personality</h3>
+                        <div class="personality-traits">
+                            <div class="trait-card">🔍 Curious Explorer</div>
+                            <div class="trait-card">💪 Self-Disciplined</div>
+                            <div class="trait-card">🤝 Team Player</div>
+                            <div class="trait-card">🎯 Responsible</div>
+                            <div class="trait-card">😌 Emotionally Stable</div>
+                            <div class="trait-card">💗 Positive Thinking</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card" style="margin-top: 30px;">
+                    <h3>Current Focus</h3>
+                    <p>I'm a passionate business student at Shanghai Jiao Tong University, majoring in Business Administration with a focus on Marketing and a minor in Finance. As an INFJ, I'm naturally curious about the world around me and love exploring new cultures through travel. My goal is to combine my business knowledge with my international experiences to make a meaningful impact in the global business world.</p>
+                </div>
+            </div>
+
+            <div id="education" class="tab-content">
+                <h2 class="section-title">Education Journey</h2>
+                
+                <div class="education-item">
+                    <div class="period">2023 - 2027</div>
+                    <h3>Shanghai Jiao Tong University</h3>
+                    <p><strong>Degree:</strong> Bachelor of Business Administration (Marketing)</p>
+                    <p><strong>Minor:</strong> Finance</p>
+                    <p><strong>Key Courses:</strong> Advanced Mathematics, Linear Algebra, Probability Statistics, Management, Finance, Programming (Python), Management Science, Business Statistics, Operations Management, Marketing, Economics</p>
+                </div>
+
+                <div class="education-item">
+                    <div class="period">2017 - 2022</div>
+                    <h3>Pin Hwa High School</h3>
+                    <p><strong>Stream:</strong> Arts & Commerce</p>
+                    <p><strong>UEC Courses:</strong> Chinese, English, Malay, Mathematics, Advanced Mathematics, History, Geography, Bookkeeping, Business Studies</p>
+                </div>
+
+                <div class="achievements">
+                    <div class="achievement-card">
+                        <div class="year">2024/11</div>
+                        <h4>Rush Hour International Business Simulation Competition</h4>
+                        <p>Second Prize</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="year">2023/10</div>
+                        <h4>Real Estate Enterprise Management Sandbox Simulation</h4>
+                        <p>Third Prize</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="year">2023-2027</div>
+                        <h4>Shanghai Jiao Tong University Scholarship</h4>
+                        <p>Academic Excellence</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="experience" class="tab-content">
+                <h2 class="section-title">Campus Experience</h2>
+                
+                <div class="education-item">
+                    <div class="period">2019 - 2022</div>
+                    <h3>Society of Mass Communication</h3>
+                    <p><strong>Position:</strong> Broadcaster, Excellent Executive Committee Member</p>
+                    <p><strong>Key Responsibilities:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Campus broadcaster: Daily notification broadcasting, manuscript writing, and program planning</li>
+                        <li>Event host: Leading school activities, coordinating cross-departmental processes</li>
+                        <li>Developed debate and expression abilities, cultivated impromptu speech skills</li>
+                    </ul>
+                </div>
+
+                <div class="education-item">
+                    <div class="period">Oct - Dec 2022</div>
+                    <h3>Prom Night Association</h3>
+                    <p><strong>Position:</strong> Financial Affairs</p>
+                    <p><strong>Key Responsibilities:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Budget management and fund allocation</li>
+                        <li>Expenditure supervision and financial record keeping</li>
+                        <li>Reimbursement review and cost control</li>
+                        <li>Supplier comparison and cost-effective solution implementation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="skills" class="tab-content">
+                <h2 class="section-title">Skills & Expertise</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>💻 Technical Skills</h3>
+                        <ul class="skill-list">
+                            <li>Python Programming</li>
+                            <li>SQL Account</li>
+                            <li>MS Office Suite</li>
+                            <li>Excel, PowerPoint, Word</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🤖 AI LLM</h3>
+                        <ul class="skill-list">
+                            <li>ChatGPT</li>
+                            <li>DeepSeek</li>
+                            <li>Claude</li>
+                            <li>Kimi, Doubao</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🎬 Creative Skills</h3>
+                        <ul class="skill-list">
+                            <li>Adobe Premiere</li>
+                            <li>CapCut</li>
+                            <li>Video Editing</li>
+                            <li>Content Creation</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🗣️ Languages</h3>
+                        <ul class="skill-list">
+                            <li>Mandarin (Native)</li>
+                            <li>English (Professional)</li>
+                            <li>Malay (Professional)</li>
+                            <li>Cantonese (Native)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hobbies" class="tab-content">
+                <h2 class="section-title">Hobbies & Interests</h2>
+                
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <div class="hobby-icon">✈️</div>
+                        <h4>Globetrotting</h4>
+                        <p>Goal: Travel the world</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">☕</div>
+                        <h4>Coffee Hopping</h4>
+                        <p>Shanghai favorites</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">📸</div>
+                        <h4>Photography</h4>
+                        <p>Portrait & Lifestyle</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🎬</div>
+                        <h4>Vlogging</h4>
+                        <p>Recording life moments</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🎿</div>
+                        <h4>Winter Sports</h4>
+                        <p>Snowboard & Ski</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🛼</div>
+                        <h4>Skating</h4>
+                        <p>Urban adventures</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🏹</div>
+                        <h4>Archery</h4>
+                        <p>Precision sport</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🎢</div>
+                        <h4>Thrill Seeker</h4>
+                        <p>Rollercoasters & Go-kart</p>
+                    </div>
+                </div>
+
+                <div class="travel-map">
+                    <h3>🌏 My Travel Map</h3>
+                    <p style="text-align: center; margin-bottom: 20px;">Countries & Cities I've Explored</p>
+                    <div class="countries-list">
+                        <div class="country-tag">🇨🇳 China (20+ cities)</div>
+                        <div class="country-tag">🇭🇰 Hong Kong</div>
+                        <div class="country-tag">🇲🇴 Macau</div>
+                        <div class="country-tag">🇹🇭 Thailand</div>
+                        <div class="country-tag">🇸🇬 Singapore</div>
+                        <div class="country-tag">🇰🇷 South Korea</div>
+                        <div class="country-tag">🇯🇵 Japan</div>
+                        <div class="country-tag">🇬🇧 United Kingdom</div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>☕ Favorite Coffee Spots in Shanghai</h3>
+                    <p><strong>Top Picks:</strong> Tequila Espresso • Coffee Spot • T12 Lab • Blacksheep</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🎨 Favorite Colors</h3>
+                    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 15px;">
+                        <div style="width: 50px; height: 50px; background: #f7d5e6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Pink</div>
+                        <div style="width: 50px; height: 50px; background: white; border: 2px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold;">White</div>
+                        <div style="width: 50px; height: 50px; background: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Black</div>
+                        <div style="width: 50px; height: 50px; background: #808080; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Grey</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact" class="tab-content">
+                <h2 class="section-title">Let's Connect</h2>
+                
+                <div class="contact-info">
+                    <h3>📧 Get in Touch</h3>
+                    <p style="font-size: 1.2em; margin: 20px 0;">
+                        <a href="mailto:lowyenqi@gmail.com">lowyenqi@gmail.com</a>
+                    </p>
+                    <p style="font-size: 1.1em; margin: 20px 0;">
+                        📱 Instagram: <a href="https://www.instagram.com/_.y3nqxx930._/" target="_blank">@_.y3nqxx930._</a>
+                    </p>
+                     <p style="font-size: 1.1em; margin: 20px 0;">
+                        📱 DouYin: <a href="https://www.douyin.com/user/self?from_tab_name=main&showTab=post" target="_blank">@琪(●--●)</a>
+                    </p>
+                    <p style="margin-top: 30px; opacity: 0.9;">
+                        Currently based in Shanghai, China<br>
+                        Always open to new opportunities and collaborations!
+                    </p>
+                </div>
+
+                <div class="info-card" style="margin-top: 30px;">
+                    <h3>💭 About This Website</h3>
+                    <p>This website reflects my journey as a global citizen and business student. I believe in the power of curiosity, continuous learning, and meaningful connections. Whether you're interested in business collaboration, travel stories, or just want to chat about coffee spots in Shanghai, I'd love to hear from you!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scrolling effect when tab changes
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelector('.main-content').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.hobby-card, .education-item, .achievement-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
